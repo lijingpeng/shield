@@ -15,3 +15,6 @@
 提高文本匹配效率可以使用Trie的树结构，[](https://github.com/lijingpeng/python/blob/master/algo/Trie.py "这是一个代码示例")
 
 #### 2. 贝叶斯分类
+
+----
+
