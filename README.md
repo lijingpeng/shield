@@ -145,5 +145,41 @@ model.most_similar("awful")
 
 详细的代码可以参见上面的链接，在上面的示例中，获取与「awful」、「queen」最相近的词，结果符合直观的理解。在风险控制领域，变异词的挖掘是一个很重要的课题，风险词汇往往是千变万化的，为了规避检查，许多人会将管控词汇进行变异，比如将「古驰」变为「古奇」，一般的风控规则很难检测到这些变化，Word2vec从语义角度提供了检测这种变异词的一种手段。
 
+## 4. Levenshtein距离
+编辑距离，又称Levenshtein距离，[WIKI](https://zh.wikipedia.org/zh-cn/%E8%90%8A%E6%96%87%E6%96%AF%E5%9D%A6%E8%B7%9D%E9%9B%A2)，是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。许可的编辑操作包括：将一个字符替换成另一个字符，插入一个字符，删除一个字符。俄罗斯科学家Vladimir Levenshtein在1965年提出这个概念。可以用来词相似度的比较。
+
+```python
+def normal_leven(str1, str2):
+    len_str1 = len(str1) + 1
+    len_str2 = len(str2) + 1
+
+    matrix = [0 for n in range(len_str1 * len_str2)]
+
+    for i in range(len_str1):
+        matrix[i] = i
+    for j in range(0, len(matrix), len_str1):
+        if j % len_str1 == 0:
+            matrix[j] = j // len_str1
+
+    for i in range(1, len_str1):
+        for j in range(1, len_str2):
+            if str1[i - 1] == str2[j - 1]:
+                cost = 0
+            else:
+                cost = 1
+            matrix[j * len_str1 + i] = min(matrix[(j - 1) * len_str1 + i] + 1,
+                                           matrix[j * len_str1 + (i - 1)] + 1,
+                                           matrix[(j - 1) * len_str1 + (i - 1)] + cost)
+
+    return matrix[-1]
+
+if __name__ == '__main__':
+    s1 = 'abcde'
+    s2 = 'adcdef'
+    print normal_leven(s1, s2)
+```
+
+输出：2，即abcde与adcdef的编辑距离是2
+
 ## 质量风控与搜索引擎
 // todo 介绍用搜素引擎的思路搭建质量风控系统
