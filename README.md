@@ -181,5 +181,8 @@ if __name__ == '__main__':
 
 输出：2，即abcde与adcdef的编辑距离是2
 
-## 质量风控与搜索引擎
-// todo 介绍用搜素引擎的思路搭建质量风控系统
+## 文章链接
+
+- [支付风控场景分析](http://blog.lixf.cn/essay/2016/12/08/risk-1-scenarios/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
+- [支付风控数据仓库建设](http://blog.lixf.cn/essay/2016/12/18/risk-2-database/)
+- [更多支付相关文档来自于这里](http://blog.lixf.cn/)
